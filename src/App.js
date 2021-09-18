@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-filename-extension */
+/* eslint-disable no-unused-expressions */
 import React, { useState } from "react";
 import Users from "./components/users";
 import SearchStatus from "./components/searchStatus";
@@ -21,13 +23,11 @@ function App() {
   return (
     <div>
       <SearchStatus length={users.length} />
-      {users.length > 0 && (
-        <Users
-          onDelete={handleDelete}
-          onToggle={handleToggleBookMark}
-          users={users}
-        />
-      )}
+      <Users
+        onDelete={handleDelete}
+        onToggle={handleToggleBookMark}
+        users={users}
+      />
     </div>
   );
 }
