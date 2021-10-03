@@ -1,40 +1,27 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true,
+    es2021: true
   },
-  extends: ["plugin:react/recommended", "airbnb"],
+  extends: ["plugin:react/recommended", "standard"],
   parserOptions: {
     ecmaFeatures: {
-      jsx: true,
+      jsx: true
     },
     ecmaVersion: 12,
-    sourceType: "module",
+    sourceType: "module"
   },
   plugins: ["react"],
   rules: {
     semi: [2, "always"],
+    indent: ["error", 2],
+    "space-before-function-paren": ["error", "never"],
     quotes: [
       "error",
       "double",
       {
-        allowTemplateLiterals: true,
-      },
-    ],
-    "object-curly-newline": [
-      "error",
-      {
-        ObjectExpression: { consistent: true, multiline: true },
-        ObjectPattern: { consistent: true, multiline: true },
-        ImportDeclaration: "never",
-        ExportDeclaration: { multiline: true, minProperties: 3 },
-      },
-    ],
-    "no-underscore-dangle": [
-      "error",
-      {
-        allow: ["_id"],
-      },
-    ],
-  },
+        allowTemplateLiterals: true
+      }
+    ]
+  }
 };

@@ -1,29 +1,25 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import _ from "lodash";
 import PropTypes from "prop-types";
+import _ from "lodash";
 
 const Pagination = ({ itemsCount, pageSize, onPageChange, currentPage }) => {
-  const pageCount = Math.ceil(itemsCount / pageSize);
+  const pagesCount = Math.ceil(itemsCount / pageSize);
+  const pages = _.range(1, pagesCount + 1);
 
-  const pages = _.range(1, pageCount + 1);
-
-  if (pageCount === 1) return null;
-
+  if (pagesCount === 1) return null;
   return (
     <nav>
       <ul className="pagination">
         {pages.map((page) => (
           <li
-            className={`page-item${page === currentPage ? " active" : ""}`}
             key={page}
+            className={"page-item " + (page === currentPage ? "active" : "")}
           >
             <a
               className="page-link"
-              role="button"
-              tabIndex={0}
-              onClick={() => onPageChange(page)}
+              onClick={() => {
+                onPageChange(page);
+              }}
             >
               {page}
             </a>
@@ -33,12 +29,11 @@ const Pagination = ({ itemsCount, pageSize, onPageChange, currentPage }) => {
     </nav>
   );
 };
-
 Pagination.propTypes = {
-  itemsCount: PropTypes.number.isRequired,
+  itemsCount: PropTypes.number,
   pageSize: PropTypes.number.isRequired,
-  onPageChange: PropTypes.func.isRequired,
   currentPage: PropTypes.number.isRequired,
+  onPageChange: PropTypes.func.isRequired
 };
 
 export default Pagination;
