@@ -9,8 +9,8 @@ import api from "../api";
 import UsersTable from "./usersTable";
 import _ from "lodash";
 
-const Users = () => {
-  const pageSize = 4;
+const UsersList = () => {
+  const pageSize = 8;
   const [currentPage, setCurrentPage] = useState(1);
   const [professions, setProfessions] = useState();
   const [selectedProf, setSelectedProf] = useState();
@@ -24,6 +24,7 @@ const Users = () => {
   const handleDelete = (userId) => {
     setUsers(users.filter((user) => user._id !== userId));
   };
+
   const handleToggleBookMark = (id) => {
     setUsers(
       users.map((user) => {
@@ -110,10 +111,11 @@ const Users = () => {
       </div>
     );
   }
-  return "loading...";
+  return <h3 className="p-3">loading...</h3>;
 };
-Users.propTypes = {
+
+UsersList.propTypes = {
   users: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
 };
 
-export default Users;
+export default UsersList;
