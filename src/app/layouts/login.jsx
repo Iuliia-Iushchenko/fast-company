@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import TextField from "../textField";
-import { validator } from "../../utils/validator";
+import TextField from "../components/textField";
+import { validator } from "../utils/validator";
 
 const Login = () => {
   const [data, setData] = useState({ email: "", password: "" });

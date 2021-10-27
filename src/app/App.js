@@ -1,9 +1,9 @@
 import React from "react";
 import NavBar from "./components/navBar";
-import Users from "./components/layouts/users";
+import Users from "./layouts/users";
 import { Route, Switch } from "react-router-dom";
-import Main from "./components/layouts/main";
-import Login from "./components/layouts/login";
+import Main from "./layouts/main";
+import Login from "./layouts/login";
 
 function App() {
   return (
