@@ -8,6 +8,7 @@ import SearchStatus from "./searchStatus";
 import api from "../api";
 import UsersTable from "./usersTable";
 import _ from "lodash";
+import TextField from "./textField";
 
 const UsersList = () => {
   const pageSize = 8;
@@ -16,6 +17,7 @@ const UsersList = () => {
   const [selectedProf, setSelectedProf] = useState();
   const [sortBy, setSortBy] = useState({ iter: "name", order: "asc" });
   const [users, setUsers] = useState();
+  const [searchUsers, setSearchUsers] = useState("");
 
   useEffect(() => {
     api.users.fetchAll().then((data) => setUsers(data));
@@ -42,9 +44,10 @@ const UsersList = () => {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [selectedProf]);
+  }, [selectedProf, searchUsers]);
 
   const handleProfessionSelect = (item) => {
+    setSearchUsers("");
     setSelectedProf(item);
   };
 
@@ -56,8 +59,17 @@ const UsersList = () => {
     setSortBy(item);
   };
 
+  const handleSearchUsers = ({ target }) => {
+    setSelectedProf();
+    setSearchUsers(target.value);
+  };
+
   if (users) {
-    const filteredUsers = selectedProf
+    const filteredUsers = searchUsers
+      ? users.filter((user) =>
+          user.name.toLowerCase().includes(searchUsers.toLowerCase())
+        )
+      : selectedProf
       ? users.filter(
           (user) =>
             JSON.stringify(user.profession) === JSON.stringify(selectedProf)
@@ -88,6 +100,13 @@ const UsersList = () => {
         )}
         <div className="d-flex flex-column">
           {count > 0 && <SearchStatus length={count} />}
+          <TextField
+            placeholder="Search..."
+            type="search"
+            name="search"
+            value={searchUsers}
+            onChange={handleSearchUsers}
+          />
           {count > 0 && (
             <UsersTable
               users={usersCrop}
